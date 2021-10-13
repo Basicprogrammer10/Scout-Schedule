@@ -1,0 +1,57 @@
+// Size of the main dot thing
+$dotSize: 40px;
+
+body {
+  margin: 0;
+  min-width: 250px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #17171a;
+  color: white;
+  height: 100%;
+  width: 100%;
+  scroll-behavior: smooth;
+  font-size: 17px;
+}
+
+.line {
+  position: absolute;
+  height: 458px;
+  width: 10px;
+  margin: 10px;
+  top: 50%;
+  transform: translate(0, -50%) translate(19px, -10px);
+  background-color: #626262;
+  z-index: -1;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
+.dot {
+  display: inline-block;
+  width: $dotSize;
+  height: $dotSize;
+  border-radius: 50%;
+  margin: 10px;
+  // background: rgb(9, 9, 121);
+  // background: linear-gradient(
+  //   0deg,
+  //   rgba(9, 9, 121, 1) 0%,
+  //   rgba(0, 212, 255, 1) 100%
+  // );
+}
+
+.event {
+  display: flex;
+  align-items: center;
+}

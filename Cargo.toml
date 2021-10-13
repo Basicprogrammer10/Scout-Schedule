@@ -1,0 +1,8 @@
+[package]
+authors = ["Connor Slade <connor@connorcode.com>"]
+edition = "2018"
+name = "scout_schedule"
+version = "0.1.0"
+
+[dependencies]
+afire = {version = "0.1.4", features = ["logging"]}
