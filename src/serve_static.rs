@@ -30,7 +30,7 @@ pub fn add_route(server: &mut afire::Server) {
             // If not send 404.html
             Err(_) => Response::new(
                 404,
-                &fs::read_to_string(format!("template/404.html"))
+                &fs::read_to_string("template/404.html")
                     .unwrap_or_else(|_| "Not Found :/".to_owned())
                     .replace("{{PAGE}}", &req.path),
                 vec![Header::new("Content-Type", "text/html")],

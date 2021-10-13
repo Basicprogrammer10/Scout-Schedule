@@ -1,7 +1,6 @@
 use std::fs;
 use std::path::Path;
 
-use serde_json;
 use serde_json::Value;
 
 pub struct Event {

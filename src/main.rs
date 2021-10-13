@@ -1,5 +1,3 @@
-use afire;
-
 mod event;
 mod routes;
 mod serve_static;
