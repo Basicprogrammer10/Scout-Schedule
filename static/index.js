@@ -30,6 +30,10 @@ function updateEvents() {
         document.querySelector("#container").appendChild(newDiv);
       });
 
+      // Size the back line for the dots
+      let size = document.querySelector('#container').clientHeight - 24;
+      document.querySelector('#line').style.height = `${size}px`
+
       // Show the back line
       document.querySelector('#line').style.display = 'block';
     });
