@@ -24,10 +24,10 @@ code {
 .line {
   position: absolute;
   height: 458px;
-  width: 10px;
+  width: 20px;
   margin: 10px;
   top: 50%;
-  transform: translate(0, -50%) translate(19px, -10px);
+  transform: translate(0, -50%) translate(14px, -10px);
   background-color: #626262;
   z-index: -1;
 }
@@ -46,6 +46,7 @@ code {
 }
 
 .dot {
+  filter: drop-shadow(0 0 10px black);
   display: inline-block;
   width: $dotSize;
   height: $dotSize;

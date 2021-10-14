@@ -1,28 +1,52 @@
 // TODO: Gen colors with Item Index
 
 // Colors
-// [Body Color, Border Color]
+// [ START COLOR END COLOR ]
 const colors = [
-  ["#835D90", "#AD93B5"],
-  ["#945B7B", "#D092B3"],
-  ["#BB5969", "#E68BA5"],
-  ["#D4635C", "#E99897"],
-  ["#E09951", "#E8D3AC"],
-  ["#DBD154", "#FFFEF3"],
-  ["#AADB54", "#CFED9B"],
-  ["#67DB54", "#B4EEAA"],
+  [7, 142, 112],
+  [59, 12, 139],
 ];
 
 function updateEvents() {
-  fetch('/schedule').then(resp => resp.json()).then(data => {
-    data.forEach((i, index) => {
-      let newDiv = document.createElement("div");
-      newDiv.innerHTML = `<div class="event"><div class="dot" style="background: ${colors[index][0]};border: 3px solid ${colors[index][1]};"></div>${i.name}</div>`;
-      document.querySelector("#container").appendChild(newDiv);
+  fetch("/schedule")
+    .then((resp) => resp.json())
+    .then((data) => {
+      let changeBy = [
+        (colors[1][0] - colors[0][0]) / (data.length - 1),
+        (colors[1][1] - colors[0][1]) / (data.length - 1),
+        (colors[1][2] - colors[0][2]) / (data.length - 1),
+      ];
+
+      data.forEach((i, index) => {
+        let newDiv = document.createElement("div");
+        newDiv.innerHTML = `<div class="event"><div class="dot" style="background: rgb(${toRgb(
+          applyRgbChange(colors[0], changeBy, index)
+        )});border: 3px solid rgb(${toRgb(
+          lightenRgb(applyRgbChange(colors[0], changeBy, index), 60)
+        )});"></div>${i.name}</div>`;
+        document.querySelector("#container").appendChild(newDiv);
+      });
     });
-  });
 }
 
-window.addEventListener("load", () => {
-  updateEvents();
-});
+window.addEventListener("load", updateEvents);
+
+function toRgb(n) {
+  return `${n[0]},${n[1]},${n[2]}`;
+}
+
+function lightenRgb(rgb, light) {
+  return [
+    Math.min(rgb[0] + light, 255),
+    Math.min(rgb[1] + light, 255),
+    Math.min(rgb[2] + light, 255),
+  ];
+}
+
+function applyRgbChange(rgb, change, i) {
+  return [
+    rgb[0] + change[0] * i,
+    rgb[1] + change[1] * i,
+    rgb[2] + change[2] * i,
+  ];
+}
