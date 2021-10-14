@@ -24,9 +24,10 @@ code {
   width: 20px;
   margin: 10px;
   top: 50%;
-  transform: translate(0, -50%) translate(14px, -10px);
+  transform: translate(0, -50%) translate(13px, -10px);
   background-color: #626262;
   z-index: -1;
+  display: none;
 }
 
 .container {
