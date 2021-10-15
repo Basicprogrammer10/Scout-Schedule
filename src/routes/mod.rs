@@ -1,7 +1,7 @@
 use afire::Server;
 
-mod get_schedule;
+mod api;
 
 pub fn add_routes(server: &mut Server) {
-    get_schedule::add_route(server);
+    api::add_routes(server);
 }

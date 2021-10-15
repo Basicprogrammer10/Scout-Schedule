@@ -5,7 +5,7 @@ use afire;
 use crate::event;
 
 pub fn add_route(server: &mut afire::Server) {
-    server.route(afire::Method::GET, "/schedule", |_req| {
+    server.route(afire::Method::GET, "/api/schedule", |_req| {
         let events = event::load_events(Path::new("data/events.json"));
 
         let resp = events

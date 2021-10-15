@@ -1,0 +1,25 @@
+.dot {
+  left: 50%;
+  position: absolute;
+  margin: 0;
+  transform: translate(-50%, 30px);
+}
+
+.arrow {
+  display: inline-block;
+  border-radius: 50%;
+  background: #232327;
+  min-width: 35px;
+  min-height: 35px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.disc {
+  background: #232327;
+  border-radius: 10px;
+  width: max-content;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, 70px);
+}

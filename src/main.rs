@@ -2,9 +2,11 @@ mod event;
 mod routes;
 mod serve_static;
 
+pub static mut ACTIVE: u32 = 0;
+
 fn main() {
     // TODO: Read from Config
-    let ip = "localhost";
+    let ip = "0.0.0.0";
     let port = 8080;
 
     println!("[*] Starting Server ({}:{})", ip, port);
