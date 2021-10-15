@@ -1,10 +1,10 @@
-// TODO: Gen colors with Item Index
-
 // Colors StartColor -> End Color
 const colors = [
   [7, 142, 112],
   [59, 12, 139],
 ];
+
+window.addEventListener("load", updateEvents);
 
 function updateEvents() {
   // Get Schedule
@@ -31,15 +31,16 @@ function updateEvents() {
       });
 
       // Size the back line for the dots
-      let size = document.querySelector('#container').clientHeight - 24;
-      document.querySelector('#line').style.height = `${size}px`
+      // Sub atleast 20
+      let size =
+        document.querySelectorAll(".dot")[data.length - 1].getBoundingClientRect().y -
+        document.querySelectorAll(".dot")[0].getBoundingClientRect().y;
+      document.querySelector("#line").style.height = `${size}px`;
 
       // Show the back line
-      document.querySelector('#line').style.display = 'block';
+      document.querySelector("#line").style.display = "block";
     });
 }
-
-window.addEventListener("load", updateEvents);
 
 // Convert an array of R, G, B to a string
 function toRgb(n) {
