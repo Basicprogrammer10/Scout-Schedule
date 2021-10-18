@@ -1,3 +1,5 @@
+const showTime = false;
+
 function updateEvents() {
   // Get Schedule
   fetch("/api/schedule")
@@ -15,10 +17,14 @@ function updateEvents() {
 
         let newDiv = document.createElement("div");
         newDiv.classList.add("item");
-        let gray = "";
-        if (data.id >= index) gray = "filter: grayscale(0%);";
+        let gray =
+          data.id >= index
+            ? ""
+            : "filter: drop-shadow(0 0 7px black) grayscale(100%);";
 
-        newDiv.innerHTML = `<div class="event"><span class="time">${time}</span><div class="dot" style="background: rgb(${toRgb(
+        newDiv.innerHTML = `<div class="event">${
+          showTime ? `<span class="time">${time}</span>` : ""
+        }<div class="dot" style="background: rgb(${toRgb(
           applyRgbChange(colors[0], changeBy, index)
         )});border: 3px solid rgb(${toRgb(
           lightenRgb(applyRgbChange(colors[0], changeBy, index), 60)
@@ -34,11 +40,14 @@ function updateEvents() {
           [data.data.length - 1].getBoundingClientRect().y -
         document.querySelectorAll(".dot")[0].getBoundingClientRect().y;
       document.querySelector("#line").style.height = `${size}px`;
+      document.querySelector("#line").style.transform = showTime
+        ? "translate(0, -50%) translate(63px, -10px)"
+        : "translate(0, -50%) translate(13px, -10px)";
 
       // Show the back line
       document.querySelector("#line").style.display = "block";
 
-      setTimeout(updateEvents, 1000);
+      setTimeout(updateEvents, 10000);
     });
 }
 

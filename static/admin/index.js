@@ -1,10 +1,12 @@
 let data = null;
+let pass = null;
 
 window.addEventListener("load", main);
 
 document.querySelector("#next").addEventListener("click", () => {
   if (data.id + 1 >= data.data.length) return;
-  fetch("/api/admin", { method: "post", body: `id=${data.id + 1}` })
+  getPass();
+  fetch(`/api/admin?pass=${pass}&id=${data.id + 1}`, { method: "post" })
     .then((resp) => resp.text())
     .then((data) => {
       if (data.indexOf("Ok!") == -1) alert("Error!");
@@ -14,7 +16,8 @@ document.querySelector("#next").addEventListener("click", () => {
 
 document.querySelector("#back").addEventListener("click", () => {
   if (data.id - 1 < 0) return;
-  fetch("/api/admin", { method: "post", body: `id=${data.id - 1}` })
+  getPass();
+  fetch(`/api/admin?pass=${pass}&id=${data.id - 1}`, { method: "post" })
     .then((resp) => resp.text())
     .then((data) => {
       if (data.indexOf("Ok!") == -1) alert("Error!");
@@ -43,4 +46,10 @@ function main() {
       document.querySelector("#event").appendChild(newDiv);
       document.querySelector("#disc").innerHTML = data.data[data.id].name;
     });
+}
+
+function getPass() {
+  if (pass == null) {
+    pass = window.prompt("Password");
+  }
 }
