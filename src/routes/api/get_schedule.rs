@@ -1,8 +1,7 @@
 use std::path::Path;
 
-use afire;
-
 use crate::event;
+use crate::ACTIVE;
 
 pub fn add_route(server: &mut afire::Server) {
     server.route(afire::Method::GET, "/api/schedule", |_req| {
@@ -16,7 +15,7 @@ pub fn add_route(server: &mut afire::Server) {
 
         afire::Response::new(
             200,
-            &format!("[{}]", resp),
+            &format!(r#"{{"id":{},"data":[{}]}}"#, unsafe { ACTIVE }, resp),
             vec![afire::Header::new("Content-Type", "application/json")],
         )
     })

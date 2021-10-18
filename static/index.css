@@ -44,7 +44,7 @@ code {
 }
 
 .dot {
-  filter: drop-shadow(0 0 7px black);
+  filter: drop-shadow(0 0 7px black) grayscale(100%);
   display: inline-block;
   width: 40px;
   height: 40px;

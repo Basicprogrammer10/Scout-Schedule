@@ -1,31 +1,46 @@
+let data = null;
+
 window.addEventListener("load", main);
 
+document.querySelector("#next").addEventListener("click", () => {
+  if (data.id + 1 >= data.data.length) return;
+  fetch("/api/admin", { method: "post", body: `id=${data.id + 1}` })
+    .then((resp) => resp.text())
+    .then((data) => {
+      if (data.indexOf("Ok!") == -1) alert("Error!");
+      main();
+    });
+});
+
+document.querySelector("#back").addEventListener("click", () => {
+  if (data.id - 1 < 0) return;
+  fetch("/api/admin", { method: "post", body: `id=${data.id - 1}` })
+    .then((resp) => resp.text())
+    .then((data) => {
+      if (data.indexOf("Ok!") == -1) alert("Error!");
+      main();
+    });
+});
+
 function main() {
-  getActive().then((active) => {
-    fetch("/api/schedule")
-      .then((resp) => resp.json())
-      .then((data) => {
-        let changeBy = genChangeBy(data.length);
+  fetch("/api/schedule")
+    .then((resp) => resp.json())
+    .then((d) => {
+      data = d;
+      let changeBy = genChangeBy(data.data.length);
 
-        let newDiv = document.createElement("div");
-        newDiv.innerHTML = `<div class="dot" style="background: rgb(${toRgb(
-          applyRgbChange(colors[0], changeBy, active)
-        )});border: 3px solid rgb(${toRgb(
-          lightenRgb(applyRgbChange(colors[0], changeBy, active), 60)
-        )});"></div>`;
-        document.querySelector("#event").appendChild(newDiv);
-      });
-  });
-}
+      let newDiv = document.createElement("div");
+      if (document.querySelector("#content") !== null) {
+        newDiv = document.querySelector("#content");
+      }
 
-function getActive() {
-  return new Promise((resolve, reject) =>
-    fetch("/api/active")
-      .then((resp) => resp.json())
-      .then((data) => {
-        const active = data.active;
-        resolve(active);
-      })
-      .catch(reject)
-  );
+      newDiv.id = "content";
+      newDiv.innerHTML = `<div class="dot" style="background: rgb(${toRgb(
+        applyRgbChange(colors[0], changeBy, data.id)
+      )});border: 3px solid rgb(${toRgb(
+        lightenRgb(applyRgbChange(colors[0], changeBy, data.id), 60)
+      )});filter: grayscale(0%);"></div>`;
+      document.querySelector("#event").appendChild(newDiv);
+      document.querySelector("#disc").innerHTML = data.data[data.id].name;
+    });
 }
