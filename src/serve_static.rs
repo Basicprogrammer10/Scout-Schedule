@@ -1,10 +1,12 @@
-use afire::*;
+use afire::Header;
+use afire::Response;
+use afire::Server;
 use std::fs;
 
 /// Dir to find files to serve
 const DATA_DIR: &str = "static";
 
-pub fn add_route(server: &mut afire::Server) {
+pub fn add_route(server: &mut Server) {
     server.all(|req| {
         let mut path = format!("{}{}", DATA_DIR, req.path.replace("/..", ""));
 
@@ -21,20 +23,19 @@ pub fn add_route(server: &mut afire::Server) {
         // Try to read File
         match fs::read(&path) {
             // If its found send it as response
-            Ok(content) => Response::new_raw(
-                200,
-                content,
-                vec![Header::new("Content-Type", get_type(&path))],
-            ),
+            Ok(content) => Response::new()
+                .bytes(content)
+                .header(Header::new("Content-Type", get_type(&path))),
 
             // If not send 404.html
-            Err(_) => Response::new(
-                404,
-                &fs::read_to_string("template/404.html")
-                    .unwrap_or_else(|_| "Not Found :/".to_owned())
-                    .replace("{{PAGE}}", &req.path),
-                vec![Header::new("Content-Type", "text/html")],
-            ),
+            Err(_) => Response::new()
+                .status(404)
+                .text(
+                    fs::read_to_string("template/404.html")
+                        .unwrap_or_else(|_| "Not Found :/".to_owned())
+                        .replace("{{PAGE}}", &req.path),
+                )
+                .header(Header::new("Content-Type", "text/html")),
         }
     });
 }

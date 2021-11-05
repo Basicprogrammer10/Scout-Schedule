@@ -4,9 +4,9 @@ version = 3
 
 [[package]]
 name = "afire"
-version = "0.1.6"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e04513185dc269627800b15a51eac74eb3ced73f3d134ead14eaa99b2db98613"
+checksum = "7e8c8a221624dfe4dbb697fadb8e3033a01cc58fa7ef8562edddeb76ce64093d"
 
 [[package]]
 name = "block-buffer"
@@ -77,7 +77,7 @@ checksum = "71d301d4193d031abdd79ff7e3dd721168a9572ef3fe51a1517aba235bd8f86e"
 
 [[package]]
 name = "scout_schedule"
-version = "0.1.0"
+version = "1.0.1"
 dependencies = [
  "afire",
  "serde_json",
@@ -117,9 +117,9 @@ dependencies = [
 
 [[package]]
 name = "simple_config_parser"
-version = "0.1.6"
+version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ca4aa1331561973f45e596d0b118aab14dab921cd46c58a3c41f1bf08235a3d8"
+checksum = "3d562b7cb7cef3d30257e59582674255342665ced8462ad861412e074c653b11"
 
 [[package]]
 name = "typenum"
